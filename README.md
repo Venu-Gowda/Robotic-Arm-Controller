@@ -174,7 +174,7 @@ void loop() {
 
 ## 📸 Physical Setup
 
-![Physical Setup](docs/physical_setup.png)
+![Physical Setup](docs/physical.png)
 
 ---
 
