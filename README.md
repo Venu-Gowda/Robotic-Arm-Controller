@@ -115,3 +115,99 @@ void loop() {
     }
   }
 }
+
+---
+
+## 📡 Communication Protocol
+
+### UART Packet Format (34 bytes)
+
+| Byte | Value | Purpose |
+|------|-------|---------|
+| 0 | 0xAA | Start byte |
+| 1 | 0x0A | Command ID |
+| 2–3 | LSB–MSB | Servo 0 PWM |
+| 4–5 | LSB–MSB | Servo 1 PWM |
+| ... | ... | ... |
+| 32–33 | LSB–MSB | Servo 15 PWM |
+
+### I2C Communication (ESP32 → PCA9685)
+
+- **Frequency:** 50 Hz (standard for hobby servos)
+- **Pulse width:** 500–2400 μs
+- **12-bit resolution:** 0–4095
+
+---
+
+## 🧪 Testing & Validation
+
+### 1. Servo Calibration
+- Individual servo sweep (min → max) to find safe operating limits
+- Prevents mechanical stress and servo burnout
+- Configurable min/max positions in GUI
+
+### 2. Stress Testing Under Load
+- All 5 servos operated simultaneously under load
+- Observed torque drop when >3 servos at full torque → led to regulated power supply
+- Added timing buffers and loop delays to prevent overheating
+
+### 3. Sequencer Validation
+- Tested step-by-step motion sequences (Base → Shoulder → Elbow → Wrist → Gripper)
+- Verified UART command interpretation and I2C timing synchronization
+- No dropped signals after multiple iterations
+
+### 4. Offline Execution
+- Exported Arduino code and flashed directly to ESP32
+- Arm executed pick-and-place sequence without PC
+- Confirmed standalone reliability and repeatability
+
+---
+
+## 🚀 Pick-and-Place Workflow
+
+1. **Manual Setup** — User adjusts each servo to define home, pick, and place positions
+2. **Path Recording** — Saves sequence: Home → Pick → Place → Return
+3. **Execution** — Enable loop for continuous operation, or single-cycle for demos
+4. **Communication** — VB.NET sends commands → ESP32 → PCA9685 → Servos
+
+---
+
+## 📸 Physical Setup
+
+![Physical Setup](docs/physical_setup.png)
+
+---
+
+## 📚 What I Learned
+
+- Register-level I2C and UART protocol implementation
+- Structured packet design for reliable serial communication
+- Multi-servo power management (isolating logic from high-current loads)
+- GUI-driven embedded systems (VB.NET ↔ ESP32 integration)
+- Team collaboration in a 2-person project environment
+
+---
+
+## 🔮 Future Enhancements
+
+- Wireless control (Wi-Fi/Bluetooth) via embedded web server
+- Gesture/voice control integration
+- Cloud logging for pick-and-place analytics
+- Computer vision upgrade with higher-resolution camera
+- Industrial protocol support (Modbus, CANopen)
+
+---
+
+## 📄 License
+
+This project is released under the MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+## 📧 Contact
+
+**Venu S**  
+Embedded Firmware Engineer  
+📧 venu1122gowda@gmail.com  
+🔗 [LinkedIn](https://linkedin.com/in/venu-s-8a9938359)  
+🐙 [GitHub](https://github.com/Venu-Gowda)
