@@ -115,7 +115,7 @@ void loop() {
     }
   }
 }
-
+```
 ---
 
 ## 📡 Communication Protocol
