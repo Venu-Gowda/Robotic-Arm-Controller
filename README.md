@@ -116,6 +116,7 @@ void loop() {
   }
 }
 ```
+[see full source in firmware/esp32_firmware.ino](firmware/esp32_firmware.ino)
 ---
 
 ## 📡 Communication Protocol
